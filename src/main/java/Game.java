@@ -8,13 +8,14 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
+    static Screen screen = null;
     public static void main(String[] args) throws IOException {
         TerminalSize terminalSize = new TerminalSize(20, 20);
         DefaultTerminalFactory terminalFactory = new
                 DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize);
 
-        Screen screen = null;
+
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
@@ -39,9 +40,12 @@ public class Game {
         screen.refresh();
     }
 
-    public void run()
-    {
-
+    public void run() throws IOException {
+        try {
+            draw();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
