@@ -7,6 +7,10 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import java.io.IOException;
+
+
+
+
 public class Main {
     public static void main(String[] args) {
         TerminalSize terminalSize = new TerminalSize(200, 200);
@@ -26,5 +30,10 @@ public class Main {
             e.printStackTrace();
         }
 
+
+        screen.clear();
+        screen.setCharacter(10, 10, TextCharacter.fromCharacter('X')
+                [0]);
+        screen.refresh();
     }
 }
