@@ -1,5 +1,8 @@
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -10,10 +13,14 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
+
     private Screen screen;
+
+
     private int x = 10;
     private int y = 10;
-    Hero hero = new Hero(10,10);
+    private Arena arena = new Arena(80,24);
+
 
     public Game(){
 
@@ -33,37 +40,23 @@ public class Game {
         }
 
 
+
     }
+
     private void processKey(KeyStroke key) {
-        System.out.println(key);
-        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q'){System.exit(0);}
-
-        switch (key.getKeyType())
-        {
-            case ArrowUp -> {
-                hero.moveUp();
-                break;
-            }
-            case ArrowDown -> {
-                hero.moveDown();
-                break;
-            }
-            case ArrowLeft -> {
-                hero.moveLeft();
-                break;
-            }
-            case ArrowRight -> {
-                hero.moveRight();
-                break;
-            }
-        }
+        arena.processKey(key);
 
     }
+
 
     private void draw() throws IOException
     {
         screen.clear();
-        hero.draw(screen);
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#CBC3E3"));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new
+                TerminalSize((arena.getWidth()), arena.getHeight()), ' ');
+        arena.draw(screen.newTextGraphics());
         screen.refresh();
     }
 
@@ -75,11 +68,10 @@ public class Game {
                 draw();
                 KeyStroke key = screen.readInput();
                 processKey(key);
-        }   catch (IOException e)
+            }   catch (IOException e)
             {
                 throw new RuntimeException(e);
             }
         }
     }
 }
-
