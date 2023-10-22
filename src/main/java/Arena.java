@@ -3,18 +3,22 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Arena
 {
     private int width;
     private int height;
     Hero hero = new Hero(10,10);
-
+    private List<Wall> walls;
 
 
     public Arena(int width, int height) {
         this.height = height;
         this.width = width;
+        this.walls = createWalls();
     }
     public int getHeight() {
         return height;
@@ -26,8 +30,25 @@ public class Arena
 
     void draw(TextGraphics graphics)
     {
+        for (Wall wall : walls)
+            wall.draw(graphics);
         hero.draw(graphics);
     }
+
+    private List<Wall> createWalls() {
+        List<Wall> walls = new ArrayList<>();
+        for (int c = 0; c < width; c++) {
+            walls.add(new Wall(c, 0));
+            walls.add(new Wall(c, height - 1));
+        }
+
+        for (int r = 1; r < height - 1; r++) {
+            walls.add(new Wall(0, r));
+            walls.add(new Wall(width - 1, r));
+        }
+        return walls;
+    }
+
 
     public void moveHero(Position position) {
         if (canHeroMove(position))
@@ -35,8 +56,15 @@ public class Arena
     }
 
     private boolean canHeroMove(Position position) {
-        if(position.x < width && position.x >=0 && position.y < height && position.y>=0)
-        {return  true;}
+        if(position.x < width-1 && position.x >=1 && position.y < height-1 && position.y>=1)
+        {
+            return true;
+
+
+        }
+
+
+
         return false;
     }
 
