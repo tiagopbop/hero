@@ -19,5 +19,5 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract void draw(TextGraphics screen);
+    public abstract void draw(TextGraphics graphics);
 }
