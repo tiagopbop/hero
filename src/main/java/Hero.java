@@ -3,25 +3,28 @@ import com.googlecode.lanterna.graphics.AbstractTextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
 public class Hero {
-    private int hx;
-    private int hy;
+
+    private Position position ;
     public Hero(int x, int y)
     {
-        this.hx = x;
-        this.hy = y;
+        position = new Position(x,y);
+        position = new Position(x,y);
     }
-    public int getX() {return hx;}
-    public void setX(int x) {this.hx = x;}
-    public int getY() {return hy;}
-    public void setY(int y) {this.hy = y;}
 
-    public void moveUp() {this.hy -= 1;}
-    public void moveDown() {this.hy += 1;}
-    public void moveRight() {this.hx += 1;}
-    public void moveLeft() {this.hx -= 1;}
+
+    public Position moveUp() {return new Position(position.getX(), position.getY() - 1);}
+    public Position moveDown() {return new Position(position.getX(), position.getY() + 1);}
+    public Position moveLeft() {return new Position(position.getX()-1, position.getY());}
+    public Position moveRight() {return new Position(position.getX()+1, position.getY());}
+
 
 
     public void draw(Screen screen) {
-        screen.setCharacter(hx, hy, TextCharacter.fromCharacter('X')[0]);
+        screen.setCharacter(position.x, position.y, TextCharacter.fromCharacter('X')[0]);
+    }
+
+    public void setPosition(Position position)
+    {
+            this.position = position;
     }
 }
