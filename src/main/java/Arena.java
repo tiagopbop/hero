@@ -59,11 +59,7 @@ public class Arena
         if(position.x < width-1 && position.x >=1 && position.y < height-1 && position.y>=1)
         {
             return true;
-
-
         }
-
-
 
         return false;
     }

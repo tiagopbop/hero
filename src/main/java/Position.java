@@ -9,9 +9,7 @@ public class Position
         this.x = a;
         this.y = b;
     }
-    public Position getPosition() {
-        return position;
-    }
+
 
 
 
