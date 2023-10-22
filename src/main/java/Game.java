@@ -43,10 +43,13 @@ public class Game {
 
     }
 
+
     private void processKey(KeyStroke key) {
         arena.processKey(key);
 
+
     }
+
 
 
     private void draw() throws IOException

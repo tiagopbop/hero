@@ -12,6 +12,7 @@ public class Hero {
     public Hero(int x, int y)
     {
         position = new Position(x,y);
+
     }
 
 
@@ -27,7 +28,17 @@ public class Hero {
                 graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(position.getX(),
                 position.getY()), " ");
+
     }
+
+
+
+
+
+
+
+
+
 
     public void setPosition(Position position)
     {
